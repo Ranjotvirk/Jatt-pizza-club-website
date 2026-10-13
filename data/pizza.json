@@ -1,0 +1,22 @@
+{ 
+"Margherita": {"price": 20.60}, 
+"Vegetarian Pizza": {"price": 20.60}, 
+"Veggie Punch": {"price": 20.60}, 
+"Veggie Slingshot": {"price": 24.99}, 
+"Vegetarian Stingers": {"price": 24.99}, 
+"Vegetarian Premee": {"price": 24.99}, 
+"Vegetarian Burger Pizza": {"price": 24.99}, 
+"Butter Paneer": {"price": 24.99}, 
+"Chilli Paneer": {"price": 24.99}, 
+"Spicy Paneer Pasand": {"price": 24.99}, 
+"Paneer Tadka": {"price": 24.99}, 
+"Peri Peri Paneer": {"price": 24.99}, 
+"Shanghai Paneer": {"price": 20.60}, 
+"Spicy Corn Delight": {"price": 20.60}, 
+"Sweet Corn Pesto": {"price": 24.99}, 
+"Veg Mazamma": {"price": 24.99}, 
+"Veg Boomerang": {"price": 29.99}, 
+"Mushroom Cheese Pizza": {"price": 20.60}, 
+"Mexican Veg Pizza": {"price": 20.60}, 
+"Garlic Cheese Pizza": {"price": 15.00} 
+}

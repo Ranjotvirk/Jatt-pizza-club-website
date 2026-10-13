@@ -1,0 +1,23 @@
+{
+    "Coca-Cola": {"price": 3.50},
+    "Pepsi": {"price": 3.50},
+    "Sprite": {"price": 3.50},
+    "7 Up": {"price": 3.50},
+    "Fanta": {"price": 3.50},
+    "Crush": {"price": 3.50},
+    "Dr Pepper": {"price": 4.00},
+    "Ginger Ale": {"price": 3.50},
+    "Root Beer": {"price": 4.00},
+    "RC Cola": {"price": 3.00},
+    "Barq's": {"price": 4.00},
+    "A&W": {"price": 4.00},
+    "Mountain Dew": {"price": 3.50},
+    "Cheerwine": {"price": 4.00},
+    "Sunkist": {"price": 3.50},
+    "Mirinda": {"price": 3.50},
+    "Schweppes": {"price": 3.50},
+    "Canada Dry": {"price": 3.50},
+    "Jarritos": {"price": 4.50},
+    "Mello Yello": {"price": 3.50},
+    "Squirt": {"price": 3.50}
+}

@@ -59,5 +59,79 @@
 {% endwith %}
 
 
+<fieldset>
+    <legend>Your Cart</legend>
+
+    {% if not cart and not selected_pizza and not selected_drinks %}
+        <p>Your cart is empty.</p>
+    {% else %}
+
+        <!-- Pizza Section -->
+        <div>
+            <h3>Your Pizzas</h3>
+            <ul>
+                {% for item, details in cart.items() %}
+                    <li>
+                        {{ item }}:
+                        {{ details.quantity }} x
+                        ${{ "%.2f"|format(details.price) }}
+                        =
+                        ${{ "%.2f"|format(details.price * details.quantity) }}
+
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div>
+                Pizza Subtotal: ${{ "%.2f"|format(pizza_subtotal) }}
+            </div>
+        </div>
+
+        <!-- Pizza Add-ons Section -->
+        <div>
+            <h3>Pizza Add-ons</h3>
+            <ul>
+                {% for pizza_name, price in selected_pizza.items() %}
+                    <li>
+                        {{ pizza_name }} -
+                        ${{ "%.2f"|format(price) }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div>
+                Pizza Subtotal: ${{ "%.2f"|format(pizza_subtotal) }}
+            </div>
+        </div>
+
+        <!-- Drinks Section -->
+        <div>
+            <h3>Your Drinks</h3>
+            <ul>
+                {% for drink_name, price in selected_drinks.items() %}
+                    <li>
+                        {{ drink_name }} -
+                        ${{ "%.2f"|format(price) }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div>
+                Drinks Subtotal: ${{ "%.2f"|format(drink_subtotal) }}
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>
+            Total: ${{ "%.2f"|format(
+                pizza_subtotal + drink_subtotal
+            ) }}
+        </h3>
+
+    {% endif %}
+</fieldset>
+
+
 
 {% endblock %}

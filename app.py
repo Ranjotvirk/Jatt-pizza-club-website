@@ -59,6 +59,40 @@ def order_history():
 def checkout():
      return render_template('invoice.html')
 
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    pizza_name = request.form.get("pizza")
+    quantity = int(request.form.get("quantity", 1))
+
+    pizzas = load_data()
+    cart = session.get('cart', {})
+
+    if pizza_name not in pizzas:
+        flash("Invalid pizza selected.")
+        return redirect(url_for('index'))
+
+    if quantity < 1:
+        flash("Quantity must be at least 1.")
+        return redirect(url_for('index'))
+
+    if pizza_name in cart:
+        cart[pizza_name]['quantity'] += quantity
+    else:
+        cart[pizza_name] = {
+            'price': pizzas[pizza_name]['price'],
+            'quantity': quantity
+        }
+
+    session['cart'] = cart
+    session.modified = True
+
+    suffix = "" if quantity == 1 else "s"
+    flash(f"{quantity} {pizza_name}{suffix} added to cart.")
+
+    return redirect(url_for('index'))
+
+
+
 
 
 if __name__ == "__main__":

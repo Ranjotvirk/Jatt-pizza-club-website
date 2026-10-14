@@ -1,0 +1,63 @@
+
+{% extends "base.html" %}
+
+{% block title %}Home - Jatt Pizza Club{% endblock %}
+
+{% block content %}
+
+<h2>Select Pizza</h2>
+
+<form action="{{ url_for('add_to_cart') }}" method="POST">
+    <label for="pizza">Pizza:</label>
+
+    <select name="pizza" id="pizza">
+        {% for pizza_name, details in pizza.items() %}
+            <option value="{{ pizza_name }}">
+                {{ pizza_name }} - ${{ details.price }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity"
+           value="1" min="1" required>
+
+    <button type="submit">Add Pizza to Cart</button>
+</form>
+
+<hr>
+
+<h2>Drinks Available</h2>
+
+<form action="{{ url_for('select_drink') }}" method="POST">
+    <fieldset>
+        <legend>Select Drinks</legend>
+
+        {% for drink, details in drinks.items() %}
+            <label>
+                <input type="checkbox" name="drinks" value="{{ drink }}">
+                {{ drink }} (${{ details.price }})
+            </label>
+            <br>
+        {% endfor %}
+    </fieldset>
+
+    <br>
+    <button type="submit">Add Drinks to Cart</button>
+</form>
+
+<hr>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+
+
+{% endblock %}

@@ -91,7 +91,33 @@ def add_to_cart():
 
     return redirect(url_for('index'))
 
+@app.route('/select_drink', methods=['POST'])
+def select_drink():
+    selected_drinks = session.get('selected_drinks', {})
+    drinks = load_data()
 
+    selected_keys = request.form.getlist('drinks')
+
+    if selected_keys:
+        selected_drinks = {}
+
+        for drink in selected_keys:
+            if drink in drinks:
+                selected_drinks[drink] = float(drinks[drink]['price'])
+
+        if selected_drinks:
+            drink_names = ", ".join(selected_drinks.keys())
+            flash(f"Added {drink_names} to your cart!")
+        else:
+            flash("Invalid drink selected.")
+    else:
+        selected_drinks = {}
+        flash("All drinks removed from your cart.")
+
+    session['selected_drinks'] = selected_drinks
+    session.modified = True
+
+    return redirect(url_for('index'))
 
 
 

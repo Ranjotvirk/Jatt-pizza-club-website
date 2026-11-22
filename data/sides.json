@@ -1,0 +1,26 @@
+{
+    "Garlic Bread": {
+        "price": 5.00,
+        "image_path": "static/images/Garlic Bread.png"
+    },
+    "Cheesy Garlic Bread": {
+        "price": 6.50,
+        "image_path": "static/images/Cheesy Garlic Bread.png"
+    },
+    "French Fries": {
+        "price": 5.00,
+        "image_path": "static/images/French Fries.png"
+    },
+    "Potato Wedges": {
+        "price": 6.00,
+        "image_path": "static/images/Potato wedges.png"
+    },
+    "Onion Rings": {
+        "price": 6.00,
+        "image_path": "static/images/Onion Rings.png"
+    },
+    "Mozzarella Sticks": {
+        "price": 7.50,
+        "image_path": "static/images/Mozzarella sticks.png"
+    }
+}

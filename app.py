@@ -298,6 +298,101 @@ def checkout():
     )
 
 
+# Add pizza to cart
+@app.route("/add_to_cart", methods=["POST"])
+def add_to_cart():
+
+    pizza_name = request.form.get("pizza")
+
+    try:
+        quantity = int(request.form.get("quantity", 1))
+    except (ValueError, TypeError):
+        flash("Please enter a valid quantity.")
+        return redirect(url_for("order"))
+
+    pizzas, drinks, sides = load_data()
+
+    cart = session.get("cart", {})
+
+    if pizza_name not in pizzas:
+        flash("Invalid pizza selected.")
+        return redirect(url_for("order"))
+
+    if quantity < 1:
+        flash("Quantity must be at least 1.")
+        return redirect(url_for("order"))
+
+    if pizza_name in cart:
+        cart[pizza_name]["quantity"] += quantity
+    else:
+        cart[pizza_name] = {
+            "price": float(pizzas[pizza_name]["price"]),
+            "quantity": quantity
+        }
+
+    session["cart"] = cart
+    session.modified = True
+
+    flash(f"{quantity} {pizza_name} added to your cart.")
+
+    return redirect(url_for("order"))
+
+
+# Select drinks
+@app.route("/select_drink", methods=["POST"])
+def select_drink():
+
+    pizzas, drinks, sides = load_data()
+
+    selected_keys = request.form.getlist("drinks")
+    selected_drinks = {}
+
+    for drink_name in selected_keys:
+        if drink_name in drinks:
+            selected_drinks[drink_name] = float(
+                drinks[drink_name]["price"]
+            )
+
+    if selected_keys and not selected_drinks:
+        flash("Invalid drink selected.")
+    elif selected_drinks:
+        flash("Drinks added to your cart.")
+    else:
+        flash("No drinks selected.")
+
+    session["selected_drinks"] = selected_drinks
+    session.modified = True
+
+    return redirect(url_for("order"))
+
+
+# Select sides
+@app.route("/select_side", methods=["POST"])
+def select_side():
+
+    pizzas, drinks, sides = load_data()
+
+    selected_keys = request.form.getlist("sides")
+    selected_sides = {}
+
+    for side_name in selected_keys:
+        if side_name in sides:
+            selected_sides[side_name] = float(
+                sides[side_name]["price"]
+            )
+
+    if selected_keys and not selected_sides:
+        flash("Invalid side selected. Check your sides.json file.")
+    elif selected_sides:
+        flash("Sides added to your cart.")
+    else:
+        flash("No sides selected.")
+
+    session["selected_sides"] = selected_sides
+    session.modified = True
+
+    return redirect(url_for("order"))
+
 
 
 

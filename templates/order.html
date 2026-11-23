@@ -157,7 +157,155 @@
 
 {% else %}
 
+    <h3>Your Pizzas</h3>
 
+    {% if cart %}
+    <div class="cart-container">
+
+        {% for pizza_key, details in cart.items() %}
+        {% set pizza_name = details.get('name', pizza_key) %}
+        {% set pizza_details = pizza.get(pizza_name, {}) %}
+
+        <div class="cart-card">
+
+            <img
+                    src="{{ pizza_details.get('image_path', '/static/images/default_pizza.png') }}"
+                    alt="{{ pizza_name }}"
+                    class="cart-pizza-image"
+                >
+
+
+            <div class="cart-pizza-info">
+
+                <h4>{{ pizza_name }}</h4>
+
+                <p>Size: {{ details.get('size', 'Medium') }}</p>
+
+                <p>
+                    Price: ${{ "%.2f"|format(details.get('price', 0)) }}
+                </p>
+
+                <p>
+                    Quantity: {{ details.get('quantity', 1) }}
+                </p>
+
+                <p class="cart-subtotal">
+                    Subtotal:
+                    ${{ "%.2f"|format(details.get('price', 0) * details.get('quantity', 1)) }}
+                </p>
+
+                <a
+                    href="{{ url_for('remove_from_cart', pizza_name=pizza_key) }}"
+                    class="remove-button"
+                >
+                    Remove
+                </a>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <p>No pizzas added yet.</p>
+    {% endif %}
+
+    <hr>
+
+ <h3>Your Drinks</h3>
+
+    {% if selected_drinks %}
+    <div class="cart-container">
+
+        {% for drink_name, price in selected_drinks.items() %}
+        <div class="cart-card">
+
+            {% if drinks.get(drink_name) %}
+            <img
+            src="{{ drinks.get(drink_name, {}).get('image_path', '/static/images/default_drink.png') }}"
+            alt="{{ drink_name }}"
+            class="cart-pizza-image"
+            >
+            {% endif %}
+
+            <div class="cart-pizza-info">
+                <h4>{{ drink_name }}</h4>
+                <p>Price: ${{ "%.2f"|format(price) }}</p>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <p>No drinks selected.</p>
+    {% endif %}
+
+    <hr>
+
+    <h3>Your Sides</h3>
+
+    {% if selected_sides %}
+    <div class="sides-container">
+
+        {% for side_name, price in selected_sides.items() %}
+        <div class="side-card">
+
+            {% if sides.get(side_name) %}
+            <img
+            src="{{ sides.get(side_name, {}).get('image_path', '/static/images/default_side.png') }}"
+            alt="{{ side_name }}"
+            class="cart-pizza-image"
+            >
+            {% endif %}
+
+            <h4>{{ side_name }}</h4>
+
+            <p class="side-price">
+                ${{ "%.2f"|format(price) }}
+            </p>
+
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+        <p>No sides selected.</p>
+    {% endif %}
+
+    <hr>
+
+{% endif %}
+<div class="cart-buttons">
+
+    <form action="{{ url_for('checkout') }}" method="POST">
+
+        <label for="customer_name">Customer Name:</label>
+
+        <input
+            type="text"
+            id="customer_name"
+            name="customer_name"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <button type="submit" class="checkout-btn">
+            Checkout
+        </button>
+
+    </form>
+
+    <button
+        type="button"
+        class="cancel-btn"
+        onclick="confirmCancel()"
+    >
+        Cancel Order
+    </button>
+
+</div>
 
 
 

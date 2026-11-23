@@ -394,6 +394,50 @@ def select_side():
     return redirect(url_for("order"))
 
 
+# Remove a pizza from cart
+@app.route("/remove_from_cart/<pizza_name>")
+def remove_from_cart(pizza_name):
+
+    cart = session.get("cart", {})
+
+    if pizza_name in cart:
+        del cart[pizza_name]
+
+        session["cart"] = cart
+        session.modified = True
+
+        flash(f"{pizza_name} removed from your cart.")
+
+    return redirect(url_for("order"))
+
+
+# Clear the cart
+@app.route("/clear_cart")
+def clear_cart():
+
+    session["cart"] = {}
+    session["selected_drinks"] = {}
+    session["selected_sides"] = {}
+
+    session.modified = True
+
+    flash("Your cart has been cleared.")
+
+    return redirect(url_for("order"))
+
+
+# Cancel order
+@app.route("/cancel_order")
+def cancel_order():
+
+    session.pop("cart", None)
+    session.pop("selected_drinks", None)
+    session.pop("selected_sides", None)
+    session.pop("customer_name", None)
+
+    flash("Your order has been cancelled.")
+
+    return redirect(url_for("order"))
 
 
 # Run Flask

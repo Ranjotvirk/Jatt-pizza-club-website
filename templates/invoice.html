@@ -17,4 +17,169 @@
 
 <hr>
 
-\
+<h2>Pizza Orders</h2>
+
+{% if cart %}
+
+<div class="cart-container">
+
+    {% for pizza_name, item in cart.items() %}
+
+    <div class="cart-card">
+
+        <img
+            src="{{ pizzas.get(pizza_name, {}).get('image_path') or url_for('static', filename='images/default_pizza.png') }}"
+            alt="{{ pizza_name }}"
+            class="cart-pizza-image"
+        >
+
+        <div class="cart-pizza-info">
+
+            <h3>{{ item.get('name', pizza_name) }}</h3>
+
+            <p>Size: {{ item.get('size', 'Medium') }}</p>
+
+            <p>Quantity: {{ item.get('quantity', 1) }}</p>
+
+            <p>
+                Unit Price:
+                ${{ "%.2f"|format(item.get('price', 0)) }}
+            </p>
+
+            <p>
+                Subtotal:
+                ${{ "%.2f"|format(item.get('price', 0) * item.get('quantity', 1)) }}
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<p>No pizzas ordered.</p>
+
+{% endif %}
+
+<hr>
+
+<h2>Drinks</h2>
+
+{% if selected_drinks %}
+
+<div class="cart-container">
+
+    {% for drink_name, price in selected_drinks.items() %}
+
+    <div class="drink-card">
+
+        <img
+            src="{{ drinks.get(drink_name, {}).get('image_path') or url_for('static', filename='images/default_drink.png') }}"
+            alt="{{ drink_name }}"
+            class="cart-pizza-image"
+        >
+
+        <div class="cart-pizza-info">
+
+            <h3>{{ drink_name }}</h3>
+
+            <p>
+                Price: ${{ "%.2f"|format(price) }}
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<p>No drinks ordered.</p>
+
+{% endif %}
+
+<hr>
+
+<h2>Sides</h2>
+
+{% if selected_sides %}
+
+<div class="cart-container">
+
+    {% for side_name, price in selected_sides.items() %}
+
+    <div class="side-card">
+
+        <img
+            src="{{ sides.get(side_name, {}).get('image_path') or url_for('static', filename='images/default_side.png') }}"
+            alt="{{ side_name }}"
+            class="cart-pizza-image"
+        >
+
+        <div class="cart-pizza-info">
+
+            <h3>{{ side_name }}</h3>
+
+            <p>
+                Price: ${{ "%.2f"|format(price) }}
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<p>No sides ordered.</p>
+
+{% endif %}
+
+<hr>
+
+<h2>Payment Summary</h2>
+
+<p>
+    Pizza Total:
+    ${{ "%.2f"|format(pizza_total) }}
+</p>
+
+<p>
+    Drinks Total:
+    ${{ "%.2f"|format(drinks_total) }}
+</p>
+
+<p>
+    Sides Total:
+    ${{ "%.2f"|format(sides_total) }}
+</p>
+
+<hr>
+
+<h2>
+    Grand Total: ${{ "%.2f"|format(total) }}
+</h2>
+
+<hr>
+
+<button onclick="window.print()" type="button">
+    Print Invoice
+</button>
+
+<a href="{{ url_for('order') }}">
+    Back to Order
+</a>
+
+{% endblock %}
+
+

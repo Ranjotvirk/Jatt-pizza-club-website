@@ -97,6 +97,67 @@
 
 <hr>
 
+<h2>Sides Available</h2>
+
+{% if sides %}
+<form action="{{ url_for('select_side') }}" method="POST">
+
+    <div class="sides-container">
+        {% for side_name, details in sides.items() %}
+        <div class="side-card">
+
+            <img src="{{ details['image_path'] }}"
+                 alt="{{ sides_name }}"
+                 class="sides-image">
+
+            <h3>{{ side_name }}</h3>
+
+            <p class="side-price">
+                ${{ "%.2f"|format(details['price']) }}
+            </p>
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="sides"
+                    value="{{ side_name }}"
+                    {% if selected_sides and side_name in selected_sides %}checked{% endif %}
+                >
+                Select Side
+            </label>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="update-sides">
+        Add to cart
+    </button>
+
+</form>
+{% else %}
+    <p>No sides are currently available.</p>
+{% endif %}
+
+<hr>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <p class="flash-message">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<h2>Your Cart</h2>
+
+{% if not cart and not selected_drinks and not selected_sides %}
+
+    <p>Your cart is empty. Add a pizza, drink, or side to get started!</p>
+
+{% else %}
+
+
 
 
 

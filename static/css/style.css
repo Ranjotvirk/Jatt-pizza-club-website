@@ -1,0 +1,847 @@
+
+/* General page styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+.about-hero h1 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.about-hero p {
+    font-size: 20px;
+    color: #4ebfa3;
+}
+
+/* Our Story */
+.our-story {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 65px 8%;
+    flex-wrap: wrap;
+}
+
+.story-image {
+    flex: 1;
+    min-width: 280px;
+}
+
+.story-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.story-content {
+    flex: 1;
+    min-width: 280px;
+}
+
+.story-content h2 {
+    font-size: 32px;
+    color: #319b82;
+    margin-bottom: 20px;
+}
+
+.story-content p {
+    line-height: 1.9;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Mission */
+.mission {
+    background-color: #e8f7f2;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.mission h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #319b82;
+}
+
+.mission p {
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.9;
+}
+
+/* Special Section */
+.special {
+    padding: 65px 25px;
+    text-align: center;
+}
+
+.special h2 {
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+.special-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.special-card {
+    background-color: white;
+    width: 280px;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+.special-card h3 {
+    color: #319b82;
+    margin-bottom: 15px;
+}
+
+.special-card p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Bottom Section */
+.about-bottom {
+    background-color: #e8f7f2;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.about-bottom h2 {
+    margin-bottom: 15px;
+}
+
+.about-bottom p {
+    margin-bottom: 25px;
+}
+
+
+/* Famous Pizzas */
+.famous-pizzas {
+    padding: 65px 30px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.famous-pizzas h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.famous-subtitle {
+    color: #777;
+    margin-bottom: 35px;
+}
+
+.famous-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.famous-card {
+    width: 300px;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.famous-card:hover {
+    transform: translateY(-8px);
+}
+
+.famous-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.famous-info {
+    padding: 22px 15px;
+}
+
+.famous-info h3 {
+    color: #319b82;
+    margin-bottom: 12px;
+}
+
+.famous-info p {
+    color: #666;
+    line-height: 1.7;
+}
+
+
+/* Header */
+header {
+    background-color: #4ebfa3;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+/* Jatt Pizza Club title */
+header h1 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #000;
+    margin: 0 0 15px 0;
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+/* Navigation links */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 10px;
+}
+
+nav a {
+    color: #003cff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Flash messages */
+.flashes {
+    list-style: none;
+    padding: 15px;
+    background-color: #d4f1f4;
+    border-left: 5px solid #4ebfa3;
+    color: #005f73;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+/* Main content */
+main {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Headings */
+h2 {
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 24px;
+    color: #222;
+    text-align: center;
+}
+
+/* Pizza form */
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #444;
+}
+
+select,
+input[type="number"] {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    height: 40px;
+}
+
+/* Display exactly 3 pizza cards per row */
+.pizza-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Pizza card */
+.pizza-card {
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Pizza image */
+.pizza-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Pizza name */
+.pizza-card h3 {
+    min-height: 25px;
+    margin: 12px 0 5px;
+    font-size: 20px;
+}
+
+/* Pizza price */
+.pizza-price {
+    color: #008b70;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Quantity label */
+.pizza-card label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Quantity input */
+.pizza-card input[type="number"] {
+    display: block;
+    width: 70px;
+    padding: 8px;
+    margin: 0 auto 12px;
+    text-align: center;
+}
+
+/* Button under quantity */
+.pizza-card button {
+    display: block;
+    width: 100%;
+    padding: 12px 8px;
+    background-color: #008b70;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.pizza-card button:hover {
+    background-color: #006b56;
+}
+
+/* Drinks grid - 3 drinks per row */
+.drink-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Drink card */
+.drink-card {
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Drink image */
+.drink-image {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Drink name */
+.drink-card h3 {
+    margin: 12px 0 5px;
+    font-size: 20px;
+}
+
+/* Drink price */
+.drink-price {
+    color: #008b70;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Checkbox */
+.drink-card label {
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Update drinks button */
+.update-drinks {
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    padding: 12px;
+    margin: 10px auto 25px;
+    background-color: #008b70;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.update-drinks:hover {
+    background-color: #006b56;
+}
+
+/* Sides grid - 3 sides per row */
+.sides-container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Side card */
+.side-card {
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Side image */
+.sides-image,
+.side-image {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Side name */
+.side-card h3,
+.side-card h4 {
+    margin: 12px 0 5px;
+    font-size: 20px;
+}
+
+/* Side price */
+.side-price {
+    color: #008b70;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Side checkbox */
+.side-card label {
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Update sides button */
+.update-sides {
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    padding: 12px;
+    margin: 10px auto 25px;
+    background-color: #008b70;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.update-sides:hover {
+    background-color: #006b56;
+}
+
+/* Cart container */
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* Cart card */
+.cart-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Cart images */
+.cart-pizza-image {
+    width: 140px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Cart information */
+.cart-pizza-info {
+    flex: 1;
+}
+
+.cart-pizza-info h4 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.cart-pizza-info p {
+    margin: 6px 0;
+}
+
+.cart-subtotal {
+    font-weight: bold;
+    color: #008b70;
+}
+
+/* Remove button */
+.remove-button {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 14px;
+    background-color: #d9534f;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.remove-button:hover {
+    background-color: #b52b27;
+}
+
+/* Old checkout and clear buttons */
+.checkout-button,
+.clear-button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.checkout-button {
+    background-color: #008b70;
+}
+
+.clear-button {
+    background-color: #555;
+}
+
+/* Checkout and Cancel Order buttons */
+.cart-buttons {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.cart-buttons form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cart-buttons label {
+    font-weight: bold;
+    color: #333;
+}
+
+.cart-buttons input[type="text"] {
+    width: 250px;
+    max-width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.checkout-btn,
+.cancel-btn {
+    height: 42px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.checkout-btn {
+    background-color: #008b70;
+}
+
+.checkout-btn:hover {
+    background-color: #006b56;
+}
+
+.cancel-btn {
+    background-color: #d9534f;
+}
+
+.cancel-btn:hover {
+    background-color: #b52b27;
+}
+
+/* General buttons */
+button {
+    background-color: #3b7dd8;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 40px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2a66b8;
+}
+
+/* Cart title */
+h2.cart-title {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #f27127;
+    font-size: 2rem;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Cart list */
+.cart-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Remove link */
+.remove-link {
+    color: #4a148c;
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: 0.95rem;
+}
+
+.remove-link:hover {
+    text-decoration: underline;
+}
+
+/* Total price */
+.total-section {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 25px;
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+    text-align: center;
+}
+
+/* Order history table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Georgia, 'Times New Roman', serif;
+    background-color: #fcf8f5;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+
+thead tr {
+    background-color: #d1e5e1;
+}
+
+th {
+    color: #3b4e4a;
+    padding: 16px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.05rem;
+    border-right: 1px solid #c2dad6;
+}
+
+th:last-child {
+    border-right: none;
+}
+
+td {
+    padding: 16px;
+    vertical-align: top;
+    text-align: center;
+    color: #4a3e3d;
+    border-bottom: 1px solid #ebdcd9;
+    border-right: 1px solid #ebdcd9;
+    font-size: 0.95rem;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #faf2ee;
+}
+
+td ul {
+    margin: 0;
+    padding-left: 18px;
+    text-align: left;
+}
+
+td li {
+    margin-bottom: 6px;
+}
+
+/* Cancel button inside table */
+td button {
+    background-color: #d8a7b8;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    height: auto;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+td button:hover {
+    background-color: #c994a6;
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: #777;
+    border-top: 1px solid #eee;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Mobile screen styling */
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: 1rem;
+    }
+
+    main {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .form-inline {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    select {
+        max-width: 100%;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+
+    .pizza-container,
+    .drink-container,
+    .sides-container {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .cart-buttons {
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    .cart-buttons input[type="text"] {
+        width: 100%;
+    }
+
+    .checkout-btn,
+    .cancel-btn {
+        padding: 10px 16px;
+    }
+}

@@ -5,133 +5,20 @@
 
 {% block content %}
 
-<h2>Select Pizza</h2>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h2>Welcome to Jatt Pizza Club</h2>
+        <h3>Desi Taste, Delicious Pizza!</h3>
+        <p>
+            Enjoy freshly made pizzas with delicious flavours,
+            quality ingredients and a Punjabi touch.
+        </p>
 
-<form action="{{ url_for('add_to_cart') }}" method="POST">
-    <label for="pizza">Pizza:</label>
-
-    <select name="pizza" id="pizza">
-        {% for pizza_name, details in pizza.items() %}
-            <option value="{{ pizza_name }}">
-                {{ pizza_name }} - ${{ details.price }}
-            </option>
-        {% endfor %}
-    </select>
-
-    <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity"
-           value="1" min="1" required>
-
-    <button type="submit">Add Pizza to Cart</button>
-</form>
-
-<hr>
-
-<h2>Drinks Available</h2>
-
-<form action="{{ url_for('select_drink') }}" method="POST">
-    <fieldset>
-        <legend>Select Drinks</legend>
-
-        {% for drink, details in drinks.items() %}
-            <label>
-                <input type="checkbox" name="drinks" value="{{ drink }}">
-                {{ drink }} (${{ details.price }})
-            </label>
-            <br>
-        {% endfor %}
-    </fieldset>
-
-    <br>
-    <button type="submit">Add Drinks to Cart</button>
-</form>
-
-<hr>
-
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul class="flashes">
-            {% for message in messages %} 
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
-
-
-<fieldset>
-    <legend>Your Cart</legend>
-
-    {% if not cart and not selected_pizza and not selected_drinks %}
-        <p>Your cart is empty.</p>
-    {% else %}
-
-        <!-- Pizza Section -->
-        <div>
-            <h3>Your Pizzas</h3>
-            <ul>
-                {% for item, details in cart.items() %}
-                    <li>
-                        {{ item }}:
-                        {{ details.quantity }} x
-                        ${{ "%.2f"|format(details.price) }}
-                        =
-                        ${{ "%.2f"|format(details.price * details.quantity) }}
-
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <div>
-                Pizza Subtotal: ${{ "%.2f"|format(pizza_subtotal) }}
-            </div>
-        </div>
-
-        <!-- Pizza Add-ons Section -->
-        <div>
-            <h3>Pizza Add-ons</h3>
-            <ul>
-                {% for pizza_name, price in selected_pizza.items() %}
-                    <li>
-                        {{ pizza_name }} -
-                        ${{ "%.2f"|format(price) }}
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <div>
-                Pizza Subtotal: ${{ "%.2f"|format(pizza_subtotal) }}
-            </div>
-        </div>
-
-        <!-- Drinks Section -->
-        <div>
-            <h3>Your Drinks</h3>
-            <ul>
-                {% for drink_name, price in selected_drinks.items() %}
-                    <li>
-                        {{ drink_name }} -
-                        ${{ "%.2f"|format(price) }}
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <div>
-                Drinks Subtotal: ${{ "%.2f"|format(drink_subtotal) }}
-            </div>
-        </div>
-
-        <hr>
-
-        <h3>
-            Total: ${{ "%.2f"|format(
-                pizza_subtotal + drink_subtotal
-            ) }}
-        </h3>
-
-    {% endif %}
-</fieldset>
-
-
+        <a href="{{ url_for('order') }}" class="order-btn">
+            Order Online
+        </a>
+    </div>
+</section>
 
 {% endblock %}

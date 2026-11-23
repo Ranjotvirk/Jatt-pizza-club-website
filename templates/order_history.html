@@ -1,0 +1,67 @@
+
+{% extends "base.html" %}
+
+{% block title %}Order History - Jatt Pizza Club{% endblock %}
+
+{% block content %}
+
+<div class="order-history-container">
+
+    <h1>Customer Order History</h1>
+
+    <p>All customer orders saved in the Jatt Pizza Club database.</p>
+
+    <hr>
+
+    {% if orders %}
+
+    <table class="order-history-table">
+
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Pizza Total</th>
+                <th>Drinks Total</th>
+                <th>Sides Total</th>
+                <th>Grand Total</th>
+                <th>Order Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for order in orders %}
+
+            <tr>
+                <td>{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>${{ "%.2f"|format(order[5]) }}</td>
+                <td>${{ "%.2f"|format(order[6]) }}</td>
+                <td>${{ "%.2f"|format(order[7]) }}</td>
+                <td><strong>${{ "%.2f"|format(order[8]) }}</strong></td>
+                <td>{{ order[9] }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <h2>No Orders Found</h2>
+    <p>Customer orders will appear here after checkout.</p>
+
+    {% endif %}
+
+    <hr>
+
+    <a href="{{ url_for('order') }}" class="history-back-btn">
+        Back to Order
+    </a>
+
+</div>
+
+{% endblock %}

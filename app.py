@@ -164,6 +164,140 @@ def order_history():
     )
 
 
+# Checkout and invoice page
+@app.route("/invoice", methods=["GET", "POST"])
+def checkout():
+
+    # Load menu data for invoice images
+    pizzas, drinks, sides = load_data()
+
+    cart = session.get("cart", {})
+    selected_drinks = session.get("selected_drinks", {})
+    selected_sides = session.get("selected_sides", {})
+
+    # Check if an order number is provided
+    order_id = request.args.get("order_id")
+
+    if request.method == "GET" and order_id:
+
+        # Retrieve saved order from database
+        conn = get_db_connection()
+
+        saved_order = conn.execute(
+            "SELECT * FROM orders WHERE id = ?",
+            (order_id,)
+        ).fetchone()
+
+        conn.close()
+
+        if saved_order is None:
+            flash("Order could not be found.")
+            return redirect(url_for("order"))
+
+        # Convert saved JSON data back into dictionaries
+        cart = json.loads(saved_order["pizzas"] or "{}")
+        selected_drinks = json.loads(saved_order["drinks"] or "{}")
+        selected_sides = json.loads(saved_order["sides"] or "{}")
+
+        return render_template(
+            "invoice.html",
+            order_id=saved_order["id"],
+            customer_name=saved_order["customer_name"],
+            cart=cart,
+            selected_drinks=selected_drinks,
+            selected_sides=selected_sides,
+            pizzas=pizzas,
+            pizza=pizzas,
+            drinks=drinks,
+            sides=sides,
+            pizza_total=saved_order["pizza_total"],
+            drinks_total=saved_order["drinks_total"],
+            sides_total=saved_order["sides_total"],
+            total=saved_order["total"]
+        )
+
+    # Calculate current cart totals
+    pizza_total, drinks_total, sides_total, total = calculate_totals(
+        cart,
+        selected_drinks,
+        selected_sides
+    )
+
+    # Customer submits checkout form
+    if request.method == "POST":
+
+        customer_name = request.form.get(
+            "customer_name", ""
+        ).strip()
+
+        if not customer_name:
+            flash("Please enter your name before checking out.")
+            return redirect(url_for("checkout"))
+
+        if not cart and not selected_drinks and not selected_sides:
+            flash("Your cart is empty. Please add items before checkout.")
+            return redirect(url_for("order"))
+
+        # Save customer name
+        session["customer_name"] = customer_name
+
+        # Save completed order into SQLite
+        try:
+            conn = get_db_connection()
+
+            cursor = conn.execute("""
+                INSERT INTO orders (
+                    customer_name,
+                    pizzas,
+                    drinks,
+                    sides,
+                    pizza_total,
+                    drinks_total,
+                    sides_total,
+                    total,
+                    date
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                customer_name,
+                json.dumps(cart),
+                json.dumps(selected_drinks),
+                json.dumps(selected_sides),
+                pizza_total,
+                drinks_total,
+                sides_total,
+                total,
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            ))
+
+            # Get the new order number
+            order_id = cursor.lastrowid
+
+            conn.commit()
+            conn.close()
+
+            flash("Your order has been saved successfully.")
+
+            # Redirect to invoice using the saved order number
+            return redirect(
+                url_for("checkout", order_id=order_id)
+            )
+
+        except sqlite3.Error as error:
+            print("Database error:", error)
+            flash("There was a problem saving your order.")
+            return redirect(url_for("checkout"))
+
+    # Display checkout page
+    return render_template(
+        "checkout.html",
+        cart=cart,
+        selected_drinks=selected_drinks,
+        selected_sides=selected_sides,
+        total=total
+    )
+
+
 
 
 
